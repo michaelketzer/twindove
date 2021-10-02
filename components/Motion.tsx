@@ -15,7 +15,7 @@ interface Props {
 
 const variantMap: Record<Direction, Variants> = {
   top: {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: -50 },
     view: { opacity: 1, y: 0 },
   },
   right: {
@@ -23,7 +23,7 @@ const variantMap: Record<Direction, Variants> = {
     view: { opacity: 1, x: 0 },
   },
   bottom: {
-    hidden: { opacity: 0, y: -50 },
+    hidden: { opacity: 0, y: 50 },
     view: { opacity: 1, y: 0 },
   },
   left: {

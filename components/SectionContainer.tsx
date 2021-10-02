@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode, RefObject, forwardRef } from "react";
 
 import Container from "./Container";
+import SectionTitle from "./SectionTitle";
 import classNames from "classnames";
 
 interface Props {
@@ -17,7 +18,7 @@ export default forwardRef(function SectionContainer(
   return (
     <section id={id} className={classNames({ alternate })}>
       <Container ref={ref}>
-        <h2>{sectionTitle}</h2>
+        <SectionTitle title={sectionTitle} />
         {children}
       </Container>
 
@@ -28,27 +29,6 @@ export default forwardRef(function SectionContainer(
 
         .alternate {
           background-color: #e6f0d0;
-        }
-
-        h2 {
-          font-size: 30px;
-          color: #222;
-          margin: 0 auto;
-          font-weight: 700;
-          position: relative;
-          text-align: center;
-          margin-bottom: calc(30px + 0.5rem);
-        }
-
-        h2:after {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          height: 1px;
-          width: 60px;
-          background-color: var(--color-primary);
-          content: " ";
-          bottom: -0.5rem;
         }
       `}</style>
     </section>
