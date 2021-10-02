@@ -21,7 +21,6 @@ export default class MyDocument extends Document {
             rel="stylesheet preload"
             href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Rubik:wght@500;700&display=swap"
           />
-          <link rel="preload" href="/hero.webp" as="image" />
         </Head>
         <body>
           <Main />
