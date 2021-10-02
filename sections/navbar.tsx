@@ -1,12 +1,24 @@
+import { ReactElement, useEffect, useState } from "react";
+
 import Container from "../components/Container";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../public/logo.svg";
-import { ReactElement } from "react";
+import classNames from "classnames";
 
 export default function NavBar(): ReactElement {
+  const [sticky, setSticky] = useState(false);
+
+  useEffect(() => {
+    const scrollHandler = () =>
+      setSticky(document.documentElement.scrollTop > 0);
+    document.addEventListener("scroll", scrollHandler);
+    scrollHandler();
+    return () => document.removeEventListener("scroll", scrollHandler);
+  }, [setSticky]);
+
   return (
-    <nav>
+    <nav className={classNames({ sticky })}>
       <Container>
         <div className="navContent">
           <Link href={"/"}>
@@ -41,9 +53,13 @@ export default function NavBar(): ReactElement {
           left: 0;
           right: 0;
           height: 50px;
+          z-index: 999;
+          transition: all 200ms ease-in-out;
+        }
+
+        .sticky {
           background-color: #fff;
           box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.06);
-          z-index: 999;
         }
 
         .navContent {
@@ -65,14 +81,17 @@ export default function NavBar(): ReactElement {
           padding: 12.5px 0.75rem;
           line-height: 25px;
           font-size: 14px;
-          color: #fff;
           height: 100%;
         }
 
         a {
           text-decoration: none;
+          color: #fff;
+          transition: color 200ms ease-in-out;
+        }
+
+        .sticky a {
           color: #585b60;
-          transition: color 150ms ease-in-out;
         }
 
         li:hover a {
