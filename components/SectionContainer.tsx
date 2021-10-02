@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, RefObject, forwardRef } from "react";
 
 import Container from "./Container";
 import classNames from "classnames";
@@ -10,15 +10,13 @@ interface Props {
   children: ReactNode;
 }
 
-export default function SectionContainer({
-  alternate,
-  children,
-  id,
-  sectionTitle,
-}: Props): ReactElement {
+export default forwardRef(function SectionContainer(
+  { alternate, children, id, sectionTitle }: Props,
+  ref: RefObject<HTMLDivElement>
+): ReactElement {
   return (
     <section id={id} className={classNames({ alternate })}>
-      <Container>
+      <Container ref={ref}>
         <h2>{sectionTitle}</h2>
         {children}
       </Container>
@@ -55,4 +53,4 @@ export default function SectionContainer({
       `}</style>
     </section>
   );
-}
+});

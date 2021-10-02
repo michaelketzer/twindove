@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Motion from "../components/Motion";
 import { ReactElement } from "react";
 import SectionContainer from "../components/SectionContainer";
 import TractorNew from "../public/why_tractor.png";
+import { useInView } from "react-intersection-observer";
 
 const leftCol = [
   {
@@ -19,6 +21,7 @@ const leftCol = [
       </svg>
     ),
     info: "We are knowledgeable and well experienced.",
+    delay: 0,
   },
   {
     icon: (
@@ -35,6 +38,7 @@ const leftCol = [
       </svg>
     ),
     info: "Our employees get involved and care about our customer’s success.",
+    delay: 0.4,
   },
   {
     icon: (
@@ -51,6 +55,7 @@ const leftCol = [
       </svg>
     ),
     info: "We have high trained drivers with certificate of driving from remarkable institutions",
+    delay: 0.8,
   },
 ];
 
@@ -70,6 +75,7 @@ const rightCol = [
       </svg>
     ),
     info: "We are much more than transporters, we are your business partner.",
+    delay: 0,
   },
   {
     icon: (
@@ -86,6 +92,7 @@ const rightCol = [
       </svg>
     ),
     info: "All our vehicles and warehousing facilities are insured.",
+    delay: 0.4,
   },
   {
     icon: (
@@ -102,12 +109,14 @@ const rightCol = [
       </svg>
     ),
     info: "We are committed to helping our clients get the best solutions with our well trained and experience staff.",
+    delay: 0.8,
   },
 ];
 
 export default function Why(): ReactElement {
+  const [ref, inView] = useInView();
   return (
-    <SectionContainer id="why" sectionTitle="Why Twindove">
+    <SectionContainer id="why" sectionTitle="Why Twindove" ref={ref}>
       <div className="container">
         <div className="info">
           Not Convinced yet?, See why our customers chose us!
@@ -115,26 +124,40 @@ export default function Why(): ReactElement {
 
         <div className="row">
           <div className="col">
-            {leftCol.map(({ icon, info }) => (
-              <div className="item" key={info}>
+            {leftCol.map(({ icon, info, delay }) => (
+              <Motion
+                from="left"
+                key={info}
+                delay={delay}
+                className="item"
+                inView={inView}
+              >
                 <div className="icon">{icon}</div>
                 <div className="description">{info}</div>
-              </div>
+              </Motion>
             ))}
           </div>
           <div className="col">
-            <Image
-              src={TractorNew}
-              alt="Twindove tractor image"
-              objectFit="contain"
-            />
+            <Motion from="bottom" inView={inView}>
+              <Image
+                src={TractorNew}
+                alt="Twindove tractor image"
+                objectFit="contain"
+              />
+            </Motion>
           </div>
           <div className="col">
-            {rightCol.map(({ icon, info }) => (
-              <div className="item" key={info}>
+            {rightCol.map(({ icon, info, delay }) => (
+              <Motion
+                from="right"
+                key={info}
+                delay={delay}
+                className="item"
+                inView={inView}
+              >
                 <div className="icon">{icon}</div>
                 <div className="description">{info}</div>
-              </div>
+              </Motion>
             ))}
           </div>
         </div>
@@ -157,7 +180,7 @@ export default function Why(): ReactElement {
           flex-direction: column;
         }
 
-        .item {
+        .row :global(.item) {
           padding: 1rem 2rem;
           background-color: #fff;
           text-align: center;
@@ -194,15 +217,11 @@ export default function Why(): ReactElement {
             flex-direction: row;
           }
 
-          .item {
-            width: 33%;
-          }
-
           .col {
             width: 100%;
           }
 
-          .item {
+          .row :global(.item) {
             width: 100%;
           }
         }

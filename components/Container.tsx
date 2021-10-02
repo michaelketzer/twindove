@@ -1,12 +1,15 @@
-import { ReactElement, ReactNode } from "react";
+import { ReactElement, ReactNode, RefObject, forwardRef } from "react";
 
 interface Props {
   children: ReactNode;
 }
 
-export default function Container({ children }: Props): ReactElement {
+export default forwardRef(function Container(
+  { children }: Props,
+  ref: RefObject<HTMLDivElement>
+): ReactElement {
   return (
-    <div className="responsiveContainer">
+    <div className="responsiveContainer" ref={ref}>
       {children}
 
       <style jsx>{`
@@ -19,4 +22,4 @@ export default function Container({ children }: Props): ReactElement {
       `}</style>
     </div>
   );
-}
+});

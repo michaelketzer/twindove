@@ -1,5 +1,7 @@
+import Motion from "../components/Motion";
 import { ReactElement } from "react";
 import SectionContainer from "../components/SectionContainer";
+import { useInView } from "react-intersection-observer";
 
 const services = [
   {
@@ -19,6 +21,7 @@ const services = [
     headline: "TRUCKS",
     description:
       "Our local trucks fleet operate throughout the country, offering day and night delivering of goods.",
+    delay: 0,
   },
   {
     icon: (
@@ -37,6 +40,7 @@ const services = [
     headline: "TRACTORS",
     description:
       "Our tractors and planters are least out to farming cooperatives, large scale farmers and companies.",
+    delay: 0.4,
   },
   {
     icon: (
@@ -55,6 +59,7 @@ const services = [
     headline: "WAREHOUSING",
     description:
       "We offer well insured warehouse facilities across for storage of farm produce and goods.",
+    delay: 0.8,
   },
   {
     icon: (
@@ -73,12 +78,19 @@ const services = [
     headline: "GRAINS",
     description:
       "We deliver the finest of grains such as: maize, soya beans, wheat, beans, rice and sorghum.",
+    delay: 1.2,
   },
 ];
 
 export default function Services(): ReactElement {
+  const [ref, inView] = useInView();
   return (
-    <SectionContainer id="services" sectionTitle="Our Services" alternate>
+    <SectionContainer
+      id="services"
+      sectionTitle="Our Services"
+      alternate
+      ref={ref}
+    >
       <div className="container">
         <div className="info">
           We are devoted to offering quality service with speed, reliability and
@@ -86,12 +98,18 @@ export default function Services(): ReactElement {
         </div>
 
         <div className="grid">
-          {services.map(({ icon, headline, description }) => (
-            <div key={headline} className="item">
+          {services.map(({ icon, headline, description, delay }) => (
+            <Motion
+              from="right"
+              inView={inView}
+              key={headline}
+              delay={delay}
+              className="item"
+            >
               <div className="icon">{icon}</div>
               <h3>{headline}</h3>
               <div className="description">{description}</div>
-            </div>
+            </Motion>
           ))}
         </div>
       </div>
@@ -113,7 +131,7 @@ export default function Services(): ReactElement {
           flex-direction: column;
         }
 
-        .item {
+        .grid :global(.item) {
           padding: 20px 10px;
           background-color: #fff;
           text-align: center;
@@ -125,7 +143,7 @@ export default function Services(): ReactElement {
           transition: box-shadow 200ms ease-in-out;
         }
 
-        .item:hover {
+        .grid :global(.item:hover) {
           box-shadow: 0 10px 22px 10px rgba(27, 38, 49, 0.1);
         }
 
@@ -168,7 +186,7 @@ export default function Services(): ReactElement {
             flex-wrap: wrap;
           }
 
-          .item {
+          .grid :global(.item) {
             width: 45%;
           }
         }
