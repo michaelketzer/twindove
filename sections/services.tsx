@@ -161,6 +161,17 @@ export default function Services(): ReactElement {
           padding: 2rem;
           font-size: 14px;
         }
+
+        @media only screen and (min-width: 990px) {
+          .grid {
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+
+          .item {
+            width: 45%;
+          }
+        }
       `}</style>
     </SectionContainer>
   );

@@ -32,21 +32,46 @@ export default function Hero(): ReactElement {
           line-height: 60px;
           margin-bottom: 2.5rem;
         }
+
         h2 {
           font-size: 1.6rem;
           color: #9ab958;
         }
+
         .info {
           margin: 0;
           font-size: 14px;
           color: #ddd;
+          text-align: center;
         }
+
         .header-button {
           margin-top: 2rem;
           color: #222;
         }
-        .header-button .btn {
-          margin-right: 10px;
+
+        .header-button {
+          text-align: center;
+        }
+
+        @media only screen and (max-width: 900px) {
+          h1 {
+            font-size: 2rem;
+            margin-bottom: 5rem;
+            text-align: center;
+          }
+
+          h2 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+          }
+        }
+
+        @media only screen and (max-width: 767px) {
+          h1 {
+            line-height: 36px;
+          }
         }
       `}</style>
     </section>
