@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import Row from "../components/Row";
 import SectionContainer from "../components/SectionContainer";
 
 export default function Contact(): ReactElement {
