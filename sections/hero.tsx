@@ -42,16 +42,11 @@ export default function Hero(): ReactElement {
           margin: 0;
           font-size: 14px;
           color: #ddd;
-          text-align: center;
         }
 
         .header-button {
           margin-top: 2rem;
           color: #222;
-        }
-
-        .header-button {
-          text-align: center;
         }
 
         @media only screen and (max-width: 900px) {
@@ -64,6 +59,11 @@ export default function Hero(): ReactElement {
           h2 {
             font-size: 1rem;
             margin-bottom: 1rem;
+            text-align: center;
+          }
+
+          .info,
+          .header-button {
             text-align: center;
           }
         }
